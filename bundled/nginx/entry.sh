@@ -42,8 +42,11 @@ for sub in $subdomains; do
 done
 
 for subdomain in $subdomains; do
-  sub=$(echo $subdomain | cut -d':' -f 1)
-  port=$(echo $subdomain | cut -d':' -f 2)
+  sub=$(echo $subdomain | awk -F ":" '{print $1}')
+  port=$(echo $subdomain | awk -F ":" '{print $2}')
+  if [[ -n $port ]]; then
+    port=":$port"
+  fi
   cat - > "${servers}/${sub}.conf" <<EOF
 server {
   listen  80;
@@ -59,7 +62,7 @@ server {
   ssl_certificate_key   /etc/letsencrypt/live/$sub.$domain/privkey.pem;
   server_name $sub.$domain;
   location / {
-		proxy_pass "http://$sub:$port";
+		proxy_pass "http://$sub$port";
   }
 }
 EOF

@@ -8,9 +8,6 @@ volumes:
 services:
   mixnetnode:
     image: hashcloak/meson:master
-    ports:
-      - "30001:30001"
-      - "40001:40001"
     volumes:
       - ./node_conf:/conf
 
@@ -22,7 +19,7 @@ services:
   grafana:
     image: grafana/grafana
     volumes:
-      - ./grafana.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./grafana:/etc/grafana/provisioning
       - grafana:/var/lib/grafana
 
   nginx:
@@ -31,9 +28,11 @@ services:
       mode: global
     environment:
       DOMAIN: ${DOMAIN}
-      SUBDOMAINS: "grafana:3000"
+      SUBDOMAINS: "grafana:3000 mixnetnode"
     ports:
       - "443:443"
       - "80:80"
+      - "30001:30001"
+      - "40001:40001"
     volumes:
       - letsencrypt:/etc/letsencrypt

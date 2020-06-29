@@ -16,4 +16,4 @@ scrape_configs:
   scheme: http
   static_configs:
   - targets:
-    - 157.245.39.195:6543
+    - mixnetnode:6543
