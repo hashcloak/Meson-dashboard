@@ -1,0 +1,39 @@
+version: "3.7"
+
+volumes:
+  grafana:
+  prometheus:
+  letsencrypt:
+
+services:
+  mixnetnode:
+    image: hashcloak/meson:master
+    ports:
+      - "30001:30001"
+      - "40001:40001"
+    volumes:
+      - ./node_conf:/conf
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - grafana:/var/lib/grafana
+
+  nginx:
+    image: local/nginx:latest
+    deploy:
+      mode: global
+    environment:
+      DOMAIN: ${DOMAIN}
+      SUBDOMAINS: "grafana:3000"
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - letsencrypt:/etc/letsencrypt

@@ -1,0 +1,105 @@
+[Server]
+  Identifier = "mixnode"
+  Addresses = ["0.0.0.0:30001"]
+  OnlyAdvertiseAltAddresses = true
+  DataDir = "/conf"
+  IsProvider = true
+  [Server.AltAddresses]
+    tcp4 = ["1.1.1.1:30001"] # The ip needs to be something that the authority can reach
+
+[Logging]
+  Disable = false
+  File = "katzenpost.log"
+  Level = "DEBUG"
+
+[Provider]
+  EnableUserRegistrationHTTP = true
+  UserRegistrationHTTPAddresses = ["0.0.0.0:40001"]
+  AdvertiseUserRegistrationHTTPAddresses = ["http://1.1.1.1:40001"]
+  BinaryRecipients = false
+  CaseSensitiveRecipients = false
+  RecipientDelimiter = ""
+  [Provider.UserDB]
+    Backend = "bolt"
+    [Provider.UserDB.Bolt]
+      UserDB = "/conf/users.db"
+  [Provider.SpoolDB]
+    Backend = "bolt"
+    [Provider.SpoolDB.Bolt]
+      SpoolDB = "/conf/spool.db"
+
+  [[Provider.Kaetzchen]]
+    Capability = "loop"
+    Endpoint = "+loop"
+    Disable = false
+
+  [[Provider.CBORPluginKaetzchen]]
+    Capability = "echo"
+    Endpoint = "+echo"
+    Command = "/go/bin/echo_server"
+    MaxConcurrency = 1
+    Disable = false
+    [Provider.CBORPluginKaetzchen.Config]
+      log_dir = "/conf"
+      log_level = "DEBUG"
+
+  [[Provider.CBORPluginKaetzchen]]
+    Capability = "panda"
+    Endpoint = "+panda"
+    Command = "/go/bin/panda_server"
+    MaxConcurrency = 1
+    Disable = false
+    [Provider.CBORPluginKaetzchen.Config]
+      fileStore = "/conf/panda.storage"
+      log_dir = "/conf"
+      log_level = "DEBUG"
+
+  [[Provider.CBORPluginKaetzchen]]
+    Capability = "spool"
+    Endpoint = "+spool"
+    Command = "/go/bin/memspool"
+    MaxConcurrency = 1
+    Disable = false
+    [Provider.CBORPluginKaetzchen.Config]
+      data_store = "/conf/memspool.storage"
+      log_dir = "/conf"
+
+  [[Provider.CBORPluginKaetzchen]]
+    Capability = "gor"
+    Endpoint = "+gor"
+    Command = "/go/bin/Meson"
+    MaxConcurrency = 1
+    Disable = false
+    [Provider.CBORPluginKaetzchen.Config]
+      f = "/conf/currency.toml"
+      log_dir = "/conf"
+      log_level = "DEBUG"
+
+[PKI]
+  [PKI.Nonvoting]
+    Address = "159.65.210.250:30000"
+    PublicKey = "qVhmF/rOHVbHwhHBP6oOOP7fE9oPg4IuEoxac+RaCHk="
+
+[Management]
+  Enable = true
+  Path = "/conf/management_sock"
+
+[Debug]
+  NumSphinxWorkers = 1
+  NumProviderWorkers = 1
+  NumKaetzchenWorkers = 3
+  SchedulerExternalMemoryQueue = false
+  SchedulerQueueSize = 0
+  SchedulerMaxBurst = 16
+  UnwrapDelay = 10
+  ProviderDelay = 500
+  KaetzchenDelay = 750
+  SchedulerSlack = 10
+  SendSlack = 50
+  DecoySlack = 15000
+  ConnectTimeout = 120000
+  HandshakeTimeout = 600000
+  ReauthInterval = 30000
+  SendDecoyTraffic = false
+  DisableRateLimit = true
+  GenerateOnly = false
