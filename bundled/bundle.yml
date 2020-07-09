@@ -28,8 +28,11 @@ services:
       mode: global
     environment:
       # https://docs.docker.com/compose/environment-variables/#pass-environment-variables-to-containers
-      - DOMAIN
-      - SUBDOMAINS: "grafana:3000 mixnetnode"
+      DOMAIN:
+      SUBDOMAINS: "grafana:3000 mixnetnode"
+    depends_on:
+      - grafana
+      - mixnetnode
     ports:
       - "443:443"
       - "80:80"
