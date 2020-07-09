@@ -1,11 +1,11 @@
 [Server]
-  Identifier = "mixnode"
+  Identifier = "mixnetnode"
   Addresses = ["0.0.0.0:30001"]
   OnlyAdvertiseAltAddresses = true
   DataDir = "/conf"
   IsProvider = true
   [Server.AltAddresses]
-    tcp4 = ["1.1.1.1:30001"] # The ip needs to be something that the authority can reach
+    tcp4 = ["167.99.197.68:30001"] # The ip needs to be something that the authority can reach
 
 [Logging]
   Disable = false
@@ -15,7 +15,7 @@
 [Provider]
   EnableUserRegistrationHTTP = true
   UserRegistrationHTTPAddresses = ["0.0.0.0:40001"]
-  AdvertiseUserRegistrationHTTPAddresses = ["http://1.1.1.1:40001"]
+  AdvertiseUserRegistrationHTTPAddresses = ["http://167.99.197.68:40001"]
   BinaryRecipients = false
   CaseSensitiveRecipients = false
   RecipientDelimiter = ""
