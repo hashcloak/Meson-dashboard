@@ -10,6 +10,9 @@ services:
     image: hashcloak/meson:master
     volumes:
       - ./node_conf:/conf
+    ports:
+      - "30001:30001"
+      - "40001:40001"
 
   prometheus:
     image: prom/prometheus
@@ -27,16 +30,13 @@ services:
     deploy:
       mode: global
     environment:
-      # https://docs.docker.com/compose/environment-variables/#pass-environment-variables-to-containers
-      DOMAIN:
-      SUBDOMAINS: "grafana:3000 mixnetnode"
+      DOMAIN: "" # your domain here. example.com
+      SUBDOMAINS: "grafana:3000"
     depends_on:
       - grafana
       - mixnetnode
     ports:
       - "443:443"
       - "80:80"
-      - "30001:30001"
-      - "40001:40001"
     volumes:
       - letsencrypt:/etc/letsencrypt
