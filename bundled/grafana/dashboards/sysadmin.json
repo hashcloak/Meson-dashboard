@@ -1,4 +1,40 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.0.6"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,7 +51,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 7,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -26,7 +62,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -125,7 +161,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -221,7 +257,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -317,7 +353,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -415,7 +451,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -513,7 +549,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -611,7 +647,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -704,7 +740,7 @@
       }
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -737,10 +773,11 @@
           "calcs": [
             "max"
           ],
+          "fields": "",
           "values": false
         }
       },
-      "pluginVersion": "7.0.1",
+      "pluginVersion": "7.0.6",
       "targets": [
         {
           "expr": "katzenpost_provider_dropped_packets_total{job=\"mixnetnode\"}",
@@ -759,7 +796,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
@@ -875,7 +912,7 @@
       }
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -908,10 +945,11 @@
           "calcs": [
             "max"
           ],
+          "fields": "",
           "values": false
         }
       },
-      "pluginVersion": "7.0.1",
+      "pluginVersion": "7.0.6",
       "targets": [
         {
           "expr": "katzenpost_kaetzchen_requests_total{job=\"mixnetnode\"}",
@@ -926,7 +964,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -959,10 +997,11 @@
           "calcs": [
             "max"
           ],
+          "fields": "",
           "values": false
         }
       },
-      "pluginVersion": "7.0.1",
+      "pluginVersion": "7.0.6",
       "targets": [
         {
           "expr": "katzenpost_outgoing_conn_outgoing_connections_total{job=\"mixnetnode\"}",
@@ -981,7 +1020,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1023,10 +1062,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_virtual_memory_bytes",
+          "expr": "go_memstats_sys_bytes",
           "interval": "",
           "legendFormat": "{{job}}",
           "refId": "A"
+        },
+        {
+          "expr": "engine_daemon_engine_memory_bytes",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1050,7 +1095,7 @@
       "yaxes": [
         {
           "$$hashKey": "object:1399",
-          "format": "short",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1100,5 +1145,5 @@
   "timezone": "",
   "title": "Sysadmin Dashboard",
   "uid": "asdkj3Adc",
-  "version": 0
+  "version": 2
 }
