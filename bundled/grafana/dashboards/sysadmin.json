@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -29,7 +29,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -55,10 +56,8 @@
       "lines": true,
       "linewidth": 5,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -128,7 +127,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -154,10 +154,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -177,7 +175,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Ger Consensus Calls / Min",
+      "title": "Get Consensus Documents Calls / Min",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -224,7 +222,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -250,10 +249,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -320,7 +317,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -346,10 +344,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -418,7 +414,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -444,10 +441,8 @@
       "lines": true,
       "linewidth": 2,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -516,7 +511,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -542,10 +538,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -615,7 +609,8 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -641,10 +636,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -734,14 +727,13 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "max"
-          ],
+          "calcs": ["max"],
           "fields": "",
           "values": false
-        }
+        },
+        "textMode": "auto"
       },
-      "pluginVersion": "7.0.6",
+      "pluginVersion": "7.1.0",
       "targets": [
         {
           "expr": "katzenpost_provider_dropped_packets_total{job=\"mixnetnode\"}",
@@ -764,19 +756,8 @@
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -808,11 +789,8 @@
       "lines": false,
       "linewidth": 1,
       "nullPointMode": "null as zero",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
-      "pluginVersion": "7.0.1",
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -847,9 +825,7 @@
         "mode": "series",
         "name": null,
         "show": false,
-        "values": [
-          "max"
-        ]
+        "values": ["max"]
       },
       "yaxes": [
         {
@@ -906,14 +882,13 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "max"
-          ],
+          "calcs": ["max"],
           "fields": "",
           "values": false
-        }
+        },
+        "textMode": "auto"
       },
-      "pluginVersion": "7.0.6",
+      "pluginVersion": "7.1.0",
       "targets": [
         {
           "expr": "katzenpost_kaetzchen_requests_total{job=\"mixnetnode\"}",
@@ -958,14 +933,13 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "max"
-          ],
+          "calcs": ["max"],
           "fields": "",
           "values": false
-        }
+        },
+        "textMode": "auto"
       },
-      "pluginVersion": "7.0.6",
+      "pluginVersion": "7.1.0",
       "targets": [
         {
           "expr": "katzenpost_outgoing_conn_outgoing_connections_total{job=\"mixnetnode\"}",
@@ -985,9 +959,11 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "description": "This show better data once you expose docker metrics: https://blog.sebas.tech/blog/docker-prometheus-ufw\n\nYou also need to open port 9323",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -1013,10 +989,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1026,15 +1000,22 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_sys_bytes",
+          "expr": "process_resident_memory_bytes{job=\"docker_host\"}",
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "C"
+        },
+        {
+          "expr": "go_memstats_sys_bytes{job=\"mixnetnode\"}",
           "interval": "",
           "legendFormat": "{{job}}",
           "refId": "A"
         },
         {
-          "expr": "engine_daemon_engine_memory_bytes",
+          "expr": "engine_daemon_engine_memory_bytes{job=\"docker_host\"}",
           "interval": "",
-          "legendFormat": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{job}}",
           "refId": "B"
         }
       ],
@@ -1042,7 +1023,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Memory Usage (Need to expose Docker stats)",
+      "title": "Memory Usage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1083,14 +1064,14 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 25,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -1109,5 +1090,5 @@
   "timezone": "",
   "title": "Sysadmin Dashboard",
   "uid": "asdkj3Adc",
-  "version": 2
+  "version": 11
 }
