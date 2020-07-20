@@ -4,14 +4,18 @@ from subprocess import check_output
 from json import loads
 from pprint import pprint
 
-def prometheus_data():
-    for ip in instance_list.values():
-        metrics = requests.get("http://" + ip+":6543/metrics").content.decode()
-        for family in text_string_to_metric_families(metrics):
-            print(family)
+def prometheus_data(ip):
+    metrics = requests.get("http://" + ip+":6543/metrics").content.decode()
+    for family in text_string_to_metric_families(metrics):
+        print(family.keys())
 
 def mixnet_document():
-    return loads(check_output(["go", "run", "mixnet.go"]))
+    return loads(check_output("./fmixnet"))
 
 if __name__ == '__main__':
-    pprint(mixnet_document())
+    #pprint(mixnet_document())
+    #topology = [item for sublist in mixnet_document()['Topology'] for item in sublist]
+    #pprint(topology)
+    #addresses = [n['Addresses']['tcp4'][0].split(":")[0] for n in topology]
+    #[pprint(prometheus_data(a)) for a in addresses]
+    pprint(layers)
