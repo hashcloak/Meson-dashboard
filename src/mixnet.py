@@ -10,7 +10,10 @@ def prometheus_data(ip):
         print(family.keys())
 
 def mixnet_document():
-    return loads(check_output("./fmixnet"))
+    try:
+        return loads(check_output("./fmixnet"))
+    except:
+        return loads(check_output("/bin/fmixnet"))
 
 if __name__ == '__main__':
     #pprint(mixnet_document())
