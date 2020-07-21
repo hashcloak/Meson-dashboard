@@ -38,6 +38,7 @@ def layers():
         html.Div(id='layer-two', children=[n['Name'] for n in two]),
     ], style = style)
 
+
 Header = html.Div(children=[
     html.H1(children="Meson Mixnet Statistics"),
     html.P(id="epoch", children="Current Epoch: "+str(document['Epoch'])),

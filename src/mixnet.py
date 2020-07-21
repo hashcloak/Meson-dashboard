@@ -1,6 +1,6 @@
 from prometheus_client.parser import text_string_to_metric_families
 import requests
-from subprocess import check_output
+from subprocess import check_output, run, PIPE, STDOUT
 from json import loads
 from pprint import pprint
 
@@ -13,7 +13,10 @@ def mixnet_document():
     try:
         return loads(check_output("./fmixnet"))
     except:
-        return loads(check_output("/bin/fmixnet"))
+        print(check_output(['/bin/echo', '$PATH']))
+        result = run("/bin/fmixnet",stdout=PIPE, stderr=STDOUT)
+        print(result.stdout)
+        return loads(result.stdout)
 
 if __name__ == '__main__':
     #pprint(mixnet_document())

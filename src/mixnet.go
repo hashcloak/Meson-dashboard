@@ -13,7 +13,7 @@ import (
 )
 
 // CFG is the config
-var CFG = []byte(`
+var CFG = `
 [Logging]
   Disable = false
   Level = "ERROR"
@@ -25,12 +25,13 @@ var CFG = []byte(`
   CaseSensitiveUserIdentifiers = false
   PollingInterval = 1
 [NonvotingAuthority]
-    Address = "auth.hashcloak.com:30000"
+		Address = "%s:%s"
     PublicKey = "qVhmF/rOHVbHwhHBP6oOOP7fE9oPg4IuEoxac+RaCHk="
-`)
+`
 
 func main() {
-	cfg, err := config.Load(CFG)
+	//fmt.Sprintf(CFG, "159.65.210.250", "3000")
+	cfg, err := config.Load([]byte(fmt.Sprintf(CFG, "159.65.210.250", "30000")))
 
 	if err != nil {
 		panic("ERROR In creating new client: " + err.Error())
