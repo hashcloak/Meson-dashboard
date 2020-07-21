@@ -11,20 +11,20 @@ from mixnet import mixnet_document, prometheus_data
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
-style = {
-    'display': 'flex',
-    'flex-direction': 'column',
-    'align-items': 'center',
-    'margin': '0 auto',
-}
-
-app.layout = html.Div(children=[
-    Header,
-    NetworkState,
-    Layers,
-    Nodes,
-    ], style=style)
-
+app.layout = html.Div(
+    children=[
+        Header,
+        NetworkState,
+        Layers,
+        Nodes,
+    ],
+    style={
+        'display': 'flex',
+        'flex-direction': 'column',
+        'align-items': 'center',
+        'margin': '0 auto',
+    }
+)
 
 """
 @app.callback(

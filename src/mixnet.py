@@ -13,10 +13,7 @@ def mixnet_document():
     try:
         return loads(check_output("./fmixnet"))
     except:
-        print(check_output(['/bin/echo', '$PATH']))
-        result = run("/bin/fmixnet",stdout=PIPE, stderr=STDOUT)
-        print(result.stdout)
-        return loads(result.stdout)
+        return loads(check_output("fmixnet"))
 
 if __name__ == '__main__':
     #pprint(mixnet_document())
@@ -24,4 +21,5 @@ if __name__ == '__main__':
     #pprint(topology)
     #addresses = [n['Addresses']['tcp4'][0].split(":")[0] for n in topology]
     #[pprint(prometheus_data(a)) for a in addresses]
-    pprint(layers)
+    #pprint(layers)
+    pass
