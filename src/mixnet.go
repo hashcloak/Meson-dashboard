@@ -25,13 +25,15 @@ var CFG = `
   CaseSensitiveUserIdentifiers = false
   PollingInterval = 1
 [NonvotingAuthority]
-		Address = "%s:%s"
-    PublicKey = "qVhmF/rOHVbHwhHBP6oOOP7fE9oPg4IuEoxac+RaCHk="
+		Address = "%s"
+    PublicKey = "%s"
 `
 
 func main() {
-	//fmt.Sprintf(CFG, "159.65.210.250", "3000")
-	cfg, err := config.Load([]byte(fmt.Sprintf(CFG, "159.65.210.250", "30000")))
+	authPubKey := "qVhmF/rOHVbHwhHBP6oOOP7fE9oPg4IuEoxac+RaCHk="
+	authAddress := "159.65.210.250:30000"
+
+	cfg, err := config.Load([]byte(fmt.Sprintf(CFG, authAddress, authPubKey)))
 
 	if err != nil {
 		panic("ERROR In creating new client: " + err.Error())
@@ -61,10 +63,18 @@ func main() {
 		panic(err)
 	}
 
-	marshall, err := json.MarshalIndent(doc, "", " ")
+	documentJSON, err := json.MarshalIndent(doc, "", " ")
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%s\n", marshall)
+	cfgJSON, err := json.MarshalIndent(cfg, "", " ")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf(`{
+		"Document": %s,
+		"Config": %s
+	}`, documentJSON, cfgJSON)
+
 	c.Shutdown()
 }
