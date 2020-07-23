@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 from collections import defaultdict
 from pprint import pprint
 
-from mixnet import mixnet_document
+from mixnet import mixnet_document, prometheus_data
 
 document = mixnet_document()
 
@@ -27,45 +27,132 @@ def public_keys():
     pass
 
 def generate_layer(layer: int, nodes: list):
+    names = [
+        html.Div(n['Name'], style={'align-self':'center'}) for n in nodes if n['Layer'] == layer
+    ]
     return html.Div(
         id='layer-{}'.format(layer),
-        children=[html.Div(n['Name'], style={'align-self': 'center'}) for n in nodes if n['Layer'] == layer],
+        children = [
+            html.Div(
+                'Layer {}'.format(layer),
+                style={
+                    'align-self':'center',
+                    'padding':'10px',
+                    'width': '1.3em',
+                }
+            ),
+            html.Div(names)
+        ],
         style = {
             'display':'flex',
             'flex-direction': 'column',
-            'flex': '0 0 20px',
+            'flex': '0 0 auto',
             'padding': '20px',
-            'margin': '10px',
-            'border':'1px solid',
+            'margin': '5px',
+            'border-color':'lightblue',
+            'width': '1.5rem'
     })
 
 def layers():
-    layer_numbers = defaultdict(int)
+    layer_numbers = []
     topology = []
- 
     # Topology is a a list of nested lists of each layer
-    for layer in document['Topology']:
+    for layer in document['Document']['Topology']:
         topology.extend([node for node in layer])
-        number = topology[-1]['Layer']
-        layer_numbers[number] = layer_numbers[number] + 1
+        if topology[-1]['Layer'] not in layer_numbers:
+            layer_numbers.append(topology[-1]['Layer'])
 
     return html.Div(
-        children = [generate_layer(l, topology) for l in layer_numbers.keys()],
+        children = [generate_layer(l, topology) for l in layer_numbers],
         style = {
             'display':'flex',
+            'width': '80%',
+            'margin':'auto',
+            'flex':'1 0 75%',
             'flex-direction': 'row',
     })
 
-Header = html.Div(children=[
-    html.H1(children="Meson Mixnet Statistics"),
-    html.P(id="epoch", children="Current Epoch: "+str(document['Epoch'])),
-])
+def generate_providers(provider):
 
-NetworkState = html.Div(id="network_container", children=[])
-Layers = html.Div(id="layers", children=layers())
-Providers = html.Div("Providers")
-Mixnodes = html.Div("Nodes")
-Nodes = html.Div(children=[
-    Providers,
-    Mixnodes,
-])
+    addresses = [item for sublist in provider['Addresses'].values() for item in sublist]
+    coins = []
+    for plugin in provider['Kaetzchen'].values():
+        if plugin.get('name') =='currency_trickle':
+            coins.append(plugin.get('endpoint').replace('+', ''))
+            
+    nameDiv = html.Div(
+        provider['Name'],
+        style = {
+            'font-size': '1.3rem',
+        }
+    )
+    addressesDiv = html.Div(
+        children=[
+            html.Div('Addresses: ' if len(addresses) == 0 else 'Address: '),
+            html.Div(addresses)
+        ],
+        style = {
+            'display': 'flex',
+            'flex-direction': 'row',
+            'flex': '0 0 1.1rem'
+        }
+    )
+    coinsDiv = html.Div(
+        children=[
+            html.Div('Supported coins: '),
+            html.Div(coins)
+        ],
+        style = {
+            'display': 'flex',
+            'flex-direction': 'row',
+            'flex': '0 0 1.1rem'
+        }
+    )
+    return html.Div(
+        children = [nameDiv, addressesDiv, coinsDiv,],
+        style = {
+            'display': 'flex',
+            'flex-direction': 'column',
+            'flex': '0 0 100px',
+            'align-self': 'center',
+        }
+    )
+
+def get_provider_address():
+    pass
+
+def get_node_address():
+    pass
+
+def network_state():
+    return html.Div(
+        'a'
+    )
+
+Header = html.H1("Meson Mixnet Statistics")
+
+NetworkState = html.Div(
+    id="network_container",
+    children=[
+        network_state(),
+        html.Div("Current Epoch: {}".format(document['Document']['Epoch']))
+    ]
+)
+
+Layers = html.Div(
+    id="layers",
+    children=layers(),
+    style = {
+        'display': 'flex'
+    }
+)
+Providers = html.Div(
+    id='providers',
+    children=[generate_providers(p) for p in document['Document']['Providers']],
+    style = {
+        'display':'flex',
+        'flex-direction': 'column',
+    }
+)
+Authority = html.Div(
+)

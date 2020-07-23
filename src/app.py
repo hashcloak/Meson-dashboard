@@ -4,7 +4,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
-from components import Header, NetworkState, Nodes, Layers
+from components import Header, NetworkState, Providers, Layers
 
 from mixnet import mixnet_document, prometheus_data
 
@@ -16,13 +16,14 @@ app.layout = html.Div(
         Header,
         NetworkState,
         Layers,
-        Nodes,
+        Providers,
     ],
     style={
         'display': 'flex',
         'flex-direction': 'column',
         'align-items': 'center',
         'margin': '0 auto',
+        'padding': '0.2em 0.2em 0.2em',
     }
 )
 

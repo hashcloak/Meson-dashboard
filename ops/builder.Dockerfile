@@ -7,5 +7,5 @@ WORKDIR /app
 COPY go.sum .
 COPY go.mod .
 RUN go mod download
-COPY src/mixnet.go mixnet.go
-RUN go build -o fmixnet mixnet.go
+COPY src/client.go client.go
+RUN go build -o fmixnet client.go
